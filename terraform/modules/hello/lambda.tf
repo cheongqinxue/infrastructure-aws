@@ -68,8 +68,8 @@ resource "aws_codepipeline" "lambda_pipeline" {
       version          = "1"
       output_artifacts = ["source_output"]
       configuration = {
-        Owner  = "your-github-username"
-        Repo   = "hello_world_lambda"
+        Owner  = var.github_username
+        Repo   = "lambda_hello_world"
         Branch = "main"
         OAuthToken = var.github_token  # You may store this in AWS Secrets Manager or directly in Terraform variables.
       }
