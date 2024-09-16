@@ -6,3 +6,10 @@ resource "aws_s3_bucket" "codepipeline_artifacts_bucket" {
   }
 }
 
+resource "aws_s3_bucket" "lambda_artifacts_bucket" {
+  bucket = "lambda_artifacts"
+
+  versioning {
+    enabled = false
+  }
+}

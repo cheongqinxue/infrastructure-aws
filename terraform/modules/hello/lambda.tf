@@ -16,12 +16,13 @@ resource "aws_lambda_function" "hello_world_lambda" {
 # Set up Code Build
 ####################################################################################################
 
-resource "aws_codebuild_project" "lambda_build" {
-  name          = "hello-world-lambda-build"
+resource "aws_codebuild_project" "hello_lambda_build" {
+  name          = "lambda_codebuild_project"
+  service_role  = aws_iam_role.codebuild_role.arn
   source {
-    type            = "GITHUB"
-    location        = "https://github.com/cheongqinxue/lambda-hello-world.git"
-    buildspec       = "hello_world/buildspec.yml"
+    type      = "GITHUB"
+    location  = "https://github.com/cheongqinxue/lambda-hello-world.git"
+    buildspec = "hello_world/buildspec.yml"
   }
 
   artifacts {
@@ -29,18 +30,14 @@ resource "aws_codebuild_project" "lambda_build" {
   }
 
   environment {
-    compute_type                = "BUILD_GENERAL1_SMALL"
-    image                       = "aws/codebuild/standard:5.0"
-    type                        = "LINUX_CONTAINER"
-    environment_variables = [
-      {
-        name  = "S3_BUCKET"
-        value = aws_s3_bucket.k_lambda_artifacts.bucket
-      }
-    ]
+    compute_type              = "BUILD_GENERAL1_SMALL"
+    image                     = "aws/codebuild/standard:6.0"
+    type                      = "LINUX_CONTAINER"
+    environment_variables = [{
+      name  = "FUNCTION_NAME"
+      value = "hello_world_lambda"
+    }]
   }
-
-  service_role = aws_iam_role.codepipeline_role.arn
 }
 
 
