@@ -1,11 +1,13 @@
 #!/bin/bash
 
-if [ -z "$0" ]; then
+set -e
+
+if [ -z "$1" ]; then
     echo "Configuring base environment for terraform"
-    conda activate base
+    source activate base
 else
-    echo "Configuring environment for $0"
-    conda activate $0
+    echo "Configuring environment for $1"
+    source activate $1
 fi
 
 echo "Installing pre-commit"
@@ -22,32 +24,3 @@ curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/instal
 
 echo "Installing tfsec"
 curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash
-
-# check if NPM is installed
-if ! command -v npm &> /dev/null; then
-    echo "NPM could not be found, installing..."
-    apt update
-    apt install -y npm
-    echo "NPM installed successfully. version=$(node -v)"
-fi
-
-echo "Installing markdownlint-cli & markdown-link-check"
-npm install -g markdownlint-cli
-npm install -g markdown-link-check
-
-# make sure xz is installed
-if ! command -v xz &> /dev/null
-then
-    echo "xz could not be found, installing..."
-    apt update
-    apt install -y xz-utils
-    echo "xz installed successfully"
-fi
-
-echo "Installing shellcheck"
-scversion="stable" # or "v0.4.7", or "latest"
-wget -qO- "https://github.com/koalaman/shellcheck/releases/download/${scversion?}/shellcheck-${scversion?}.linux.x86_64.tar.xz" | tar -xJv
-cp "shellcheck-${scversion}/shellcheck" /usr/bin/
-shellcheck --version
-
-conda install typos
