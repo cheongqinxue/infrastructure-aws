@@ -5,3 +5,8 @@ variable "aws_region" {
   type        = string
   default     = "ap-southeast-1" # Optional default value
 }
+
+variable "local_dev_keypair" {
+  type = string
+  description = "Local dev keypair"
+}
