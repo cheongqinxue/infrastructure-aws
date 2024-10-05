@@ -1,17 +1,18 @@
-# default to base environment if $0 is not set
-if [ -z "$0" ]; then
+#!/bin/bash
+
+if [ -z "$1" ]; then
     echo "Configuring base environment for terraform"
     conda activate base
 else
-    echo "Configuring environment for $0"
-    conda activate $0
+    echo "Configuring environment for $1"
+    conda activate "$0"
 fi
 
 echo "Installing pre-commit"
 pip install pre-commit
 
 echo "Installing terraform-docs"
-curl -sSLo ./terraform-docs.tar.gz https://terraform-docs.io/dl/v0.18.0/terraform-docs-v0.18.0-$(uname)-amd64.tar.gz
+curl -sSLo ./terraform-docs.tar.gz https://terraform-docs.io/dl/v0.18.0/terraform-docs-v0.18.0-"$(uname)"-amd64.tar.gz
 tar -xzf terraform-docs.tar.gz
 chmod +x terraform-docs
 mv terraform-docs ~/terraform-docs

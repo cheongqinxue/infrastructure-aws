@@ -1,4 +1,7 @@
+# Root module (variables.tf)
+
 variable "aws_region" {
-    type = string
-    description = "AWS region"
+  description = "The AWS region to deploy resources in"
+  type        = string
+  default     = "ap-southeast-1" # Optional default value
 }
