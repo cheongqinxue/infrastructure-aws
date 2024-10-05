@@ -30,8 +30,9 @@ resource "aws_instance" "kit_ec2" {
   ami           = "ami-0ad522a4a529e7aa8" # Linux
   instance_type = "t2.micro"              # Free tier instance type
 
-  key_name        = var.local_dev_keypair
-  security_groups = [aws_security_group.kit_security_group.name]
+  availability_zone = var.aws_region
+  key_name          = var.local_dev_keypair
+  security_groups   = [aws_security_group.kit_security_group.name]
 
   tags = {
     Name = "kit-ec2"
