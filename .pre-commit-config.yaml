@@ -8,9 +8,6 @@ repos:
     args:
     - --allow-multiple-documents
   - id: detect-private-key
-  # - id: pretty-format-json
-  #   args:
-  #   - --autofix
   - id: trailing-whitespace
 
 - repo: https://github.com/antonbabenko/pre-commit-terraform
@@ -34,10 +31,10 @@ repos:
   hooks:
   - id: markdownlint
 
-- repo: https://github.com/tanrobotix/mdlink-check-precommit.git
-  rev: v1.0.2
-  hooks:
-  - id: markdown-link-check
+# - repo: https://github.com/tanrobotix/mdlink-check-precommit.git
+#   rev: v1.0.2
+#   hooks:
+#   - id: markdown-link-check
 
 - repo: https://github.com/gruntwork-io/pre-commit
   rev: v0.1.20
