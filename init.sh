@@ -1,4 +1,5 @@
-# default to base environment if $0 is not set
+#!/bin/bash
+
 if [ -z "$0" ]; then
     echo "Configuring base environment for terraform"
     conda activate base
