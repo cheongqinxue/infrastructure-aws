@@ -23,6 +23,12 @@ resource "aws_iam_role_policy_attachment" "kit_iam_role_attach_ssm" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
+# Create the instance profile
+resource "aws_iam_instance_profile" "kit_iam_instance_profile" {
+  name = "kit-ec2-ssm-instance-profile"
+  role = aws_iam_role.kit_iam_role.name
+}
+
 ####################################################################################################
 # Security Group
 ####################################################################################################
@@ -86,7 +92,7 @@ resource "aws_instance" "kit_ec2" {
   user_data = file("${path.module}/resources/user_data.sh")
 
   # Attach IAM role for SSM
-  iam_instance_profile = aws_iam_instance_profile.kit_iam_role.id
+  iam_instance_profile = aws_iam_instance_profile.kit_iam_instance_profile.id
 
   # Metadata Options: Enforce HTTP Token
   # Instructions to get token:
