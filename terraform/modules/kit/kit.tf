@@ -36,6 +36,7 @@ resource "aws_iam_instance_profile" "kit_iam_instance_profile" {
 resource "aws_security_group" "kit_security_group" {
   name        = "kit-security-group"
   description = "Allow SSH and HTTP traffic"
+  vpc_id      = var.vpc_id
 
   ingress {
     from_port   = 22

@@ -37,4 +37,5 @@ No inputs.
 | Name | Description |
 |------|-------------|
 | <a name="output_subnet_1_id"></a> [subnet\_1\_id](#output\_subnet\_1\_id) | id of subnet\_1\_id |
+| <a name="output_vpc_1_id"></a> [vpc\_1\_id](#output\_vpc\_1\_id) | id of vpc\_1\_id |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

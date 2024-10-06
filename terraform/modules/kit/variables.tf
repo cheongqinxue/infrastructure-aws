@@ -3,6 +3,11 @@ variable "subnet_id" {
   type        = string
 }
 
+variable "vpc_id" {
+  description = "The ID of the VPC where the EC2 instance will be launched."
+  type        = string
+}
+
 variable "local_dev_keypair" {
   type        = string
   description = "Local dev keypair"
