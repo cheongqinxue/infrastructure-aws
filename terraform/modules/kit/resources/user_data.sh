@@ -12,7 +12,7 @@ systemctl start amazon-ssm-agent
 sudo yum update -y
 
 # Install NGINX
-sudo amazon-linux-extras install nginx1.12 -y
+sudo yum install nginx-1.24.0 -y
 
 # Start NGINX
 sudo systemctl start nginx
