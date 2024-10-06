@@ -77,6 +77,7 @@ resource "aws_security_group" "kit_security_group" {
 resource "aws_instance" "kit_ec2" {
   ami           = "ami-0ad522a4a529e7aa8" # Linux
   instance_type = "t3.nano"               # Free tier instance type
+  subnet_id     = var.subnet_id
 
   availability_zone = "ap-southeast-1a"
   key_name          = var.local_dev_keypair
