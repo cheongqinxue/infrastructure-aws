@@ -26,9 +26,8 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_github_token"></a> [github\_token](#input\_github\_token) | Your GitHub token | `string` | n/a | yes |
-| <a name="input_github_username"></a> [github\_username](#input\_github\_username) | Your GitHub username | `string` | n/a | yes |
-| <a name="input_region"></a> [region](#input\_region) | The AWS region to deploy resources in | `string` | `"ap-southeast-1"` | no |
+| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | The AWS region to deploy resources in | `string` | `"ap-southeast-1"` | no |
+| <a name="input_local_dev_keypair"></a> [local\_dev\_keypair](#input\_local\_dev\_keypair) | Local dev keypair | `string` | n/a | yes |
 
 ## Outputs
 

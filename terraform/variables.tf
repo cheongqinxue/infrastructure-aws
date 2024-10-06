@@ -7,6 +7,6 @@ variable "aws_region" {
 }
 
 variable "local_dev_keypair" {
-  type = string
+  type        = string
   description = "Local dev keypair"
 }
