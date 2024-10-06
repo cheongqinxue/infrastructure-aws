@@ -81,7 +81,7 @@ resource "aws_instance" "kit_ec2" {
 
   availability_zone = "ap-southeast-1a"
   key_name          = var.local_dev_keypair
-  security_groups   = [aws_security_group.kit_security_group.name]
+  security_groups   = [aws_security_group.kit_security_group.id]
 
   # Root EBS Block Device
   root_block_device {
