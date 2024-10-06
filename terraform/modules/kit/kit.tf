@@ -83,6 +83,8 @@ resource "aws_instance" "kit_ec2" {
     encrypted   = true
   }
 
+  user_data = file("${path.module}/resources/user_data.sh")
+
   # Attach IAM role for SSM
   iam_instance_profile = aws_iam_instance_profile.kit_ssm_instance_profile.id
 
