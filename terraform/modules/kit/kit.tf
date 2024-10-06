@@ -2,7 +2,7 @@
 # IAM
 ####################################################################################################
 # IAM assume role
-resource "aws_iam_role" "kit_ssm_role" {
+resource "aws_iam_role" "kit_iam_role" {
   name = "kit-ec2-ssm-role"
 
   assume_role_policy = jsonencode({
@@ -18,8 +18,8 @@ resource "aws_iam_role" "kit_ssm_role" {
 }
 
 # Attach the AmazonSSMManagedInstanceCore policy to the role
-resource "aws_iam_role_policy_attachment" "kit_ssm_role_policy" {
-  role       = aws_iam_role.kit_ssm_role.name
+resource "aws_iam_role_policy_attachment" "kit_iam_role_attach_ssm" {
+  role       = aws_iam_role.kit_iam_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
@@ -86,7 +86,7 @@ resource "aws_instance" "kit_ec2" {
   user_data = file("${path.module}/resources/user_data.sh")
 
   # Attach IAM role for SSM
-  iam_instance_profile = aws_iam_instance_profile.kit_ssm_instance_profile.id
+  iam_instance_profile = aws_iam_instance_profile.kit_iam_role.id
 
   # Metadata Options: Enforce HTTP Token
   # Instructions to get token:
