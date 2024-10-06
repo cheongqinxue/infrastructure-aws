@@ -13,7 +13,8 @@ resource "aws_vpc" "vpc1" { #tfsec:ignore:aws-ec2-require-vpc-flow-logs-for-all-
 }
 
 resource "aws_vpc_ipv6_cidr_block_association" "ipv6_block_1" {
-  vpc_id = aws_vpc.vpc1.id
+  assign_generated_ipv6_cidr_block = true
+  vpc_id                           = aws_vpc.vpc1.id
 }
 
 # Create an Internet Gateway
