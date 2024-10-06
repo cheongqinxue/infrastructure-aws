@@ -23,7 +23,9 @@ No modules.
 | Name | Type |
 |------|------|
 | [aws_iam_instance_profile.kit_iam_instance_profile](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_instance_profile) | resource |
+| [aws_iam_policy.kit_secrets_manager_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_role.kit_iam_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.kit_iam_role_attach_secrets](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.kit_iam_role_attach_ssm](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_instance.kit_ec2](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) | resource |
 | [aws_security_group.kit_security_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
@@ -33,6 +35,8 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_local_dev_keypair"></a> [local\_dev\_keypair](#input\_local\_dev\_keypair) | Local dev keypair | `string` | n/a | yes |
+| <a name="input_openai_key_arn"></a> [openai\_key\_arn](#input\_openai\_key\_arn) | ARN of the OpenAI API key | `string` | n/a | yes |
+| <a name="input_qdrant_key_arn"></a> [qdrant\_key\_arn](#input\_qdrant\_key\_arn) | ARN of the Qdrant API key | `string` | n/a | yes |
 | <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | The ID of the subnet where the EC2 instance will be launched. | `string` | n/a | yes |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The ID of the VPC where the EC2 instance will be launched. | `string` | n/a | yes |
 

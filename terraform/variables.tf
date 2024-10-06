@@ -1,4 +1,15 @@
 # Root module (variables.tf)
+variable "qdrant_key" {
+  type        = string
+  description = "Qdrant API key"
+  sensitive   = true
+}
+
+variable "openai_key" {
+  type        = string
+  description = "OpenAI API key"
+  sensitive   = true
+}
 
 variable "aws_region" {
   description = "The AWS region to deploy resources in"

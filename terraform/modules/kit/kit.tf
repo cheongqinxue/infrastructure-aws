@@ -29,6 +29,34 @@ resource "aws_iam_instance_profile" "kit_iam_instance_profile" {
   role = aws_iam_role.kit_iam_role.name
 }
 
+# IAM Policy for accessing Secrets Manager
+resource "aws_iam_policy" "kit_secrets_manager_policy" {
+  name        = "kit-secrets-manager-policy"
+  description = "Policy to allow EC2 to access Secrets Manager"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "secretsmanager:GetSecretValue",
+          "secretsmanager:DescribeSecret"
+        ]
+        Resource = [
+          var.openai_key_arn,
+          var.qdrant_key_arn
+        ]
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "kit_iam_role_attach_secrets" {
+  role       = aws_iam_role.kit_iam_role.name
+  policy_arn = aws_iam_policy.kit_secrets_manager_policy.arn
+}
+
 ####################################################################################################
 # Security Group
 ####################################################################################################
