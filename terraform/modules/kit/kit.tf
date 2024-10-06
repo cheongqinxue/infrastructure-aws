@@ -3,7 +3,7 @@
 ####################################################################################################
 # IAM assume role
 resource "aws_iam_role" "kit_iam_role" {
-  name = "kit-ec2-ssm-role"
+  name = "kit-ec2-iam-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -25,7 +25,7 @@ resource "aws_iam_role_policy_attachment" "kit_iam_role_attach_ssm" {
 
 # Create the instance profile
 resource "aws_iam_instance_profile" "kit_iam_instance_profile" {
-  name = "kit-ec2-ssm-instance-profile"
+  name = "kit-ec2-iam-instance-profile"
   role = aws_iam_role.kit_iam_role.name
 }
 
@@ -47,27 +47,30 @@ resource "aws_security_group" "kit_security_group" {
   }
 
   ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] #tfsec:ignore:aws-ec2-no-public-ingress-sgr
-    description = "Allow HTTP access"
+    from_port        = 80
+    to_port          = 80
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"] #tfsec:ignore:aws-ec2-no-public-ingress-sgr
+    ipv6_cidr_blocks = ["::/0"]      #tfsec:ignore:aws-ec2-no-public-ingress-sgr
+    description      = "Allow HTTP access"
   }
 
   ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] #tfsec:ignore:aws-ec2-no-public-ingress-sgr
-    description = "Allow HTTPS access"
+    from_port        = 443
+    to_port          = 443
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"] #tfsec:ignore:aws-ec2-no-public-ingress-sgr
+    ipv6_cidr_blocks = ["::/0"]      #tfsec:ignore:aws-ec2-no-public-ingress-sgr
+    description      = "Allow HTTPS access"
   }
 
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"] #tfsec:ignore:aws-ec2-no-public-egress-sgr
-    description = "Allow all outbound traffic"
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"] #tfsec:ignore:aws-ec2-no-public-egress-sgr
+    ipv6_cidr_blocks = ["::/0"]      #tfsec:ignore:aws-ec2-no-public-egress-sgr
+    description      = "Allow all outbound traffic"
   }
 }
 
@@ -83,6 +86,9 @@ resource "aws_instance" "kit_ec2" {
   availability_zone = "ap-southeast-1a"
   key_name          = var.local_dev_keypair
   security_groups   = [aws_security_group.kit_security_group.id]
+
+  # Associate public IPv6 address (by default, AWS will assign one)
+  associate_public_ip_address = true
 
   # Root EBS Block Device
   root_block_device {
